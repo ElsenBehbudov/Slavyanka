@@ -7,6 +7,13 @@ import { FaBars } from "react-icons/fa";
 const Header = () => {
   const [Modal, setModal] = useState(false);
   const [Nav, setNav] = useState(false);
+  const [Shop, setShop] = useState(false);
+  const [Call, setCall] = useState(false);
+  const [name, setName] = useState("");
+  const [surname, setSurname] = useState("");
+  const [phone, setPhone] = useState("");
+  const [error, setError] = useState(false);
+
   return (
     <div className="header">
       <div className="header-component">
@@ -31,7 +38,7 @@ const Header = () => {
           <button className="icon user-btn">
             <FaRegUser />
           </button>
-          <button className="icon">
+          <button className="icon" onClick={() => setShop(true)}>
             <MdOutlineShoppingCart />
           </button>
           <button className="icon nav" onClick={() => setNav(true)}>
@@ -40,7 +47,7 @@ const Header = () => {
         </div>
 
         <div className="call-flex">
-          <button className="call">
+          <button className="call" onClick={() => setCall(true)}>
             <span className="call-icon">
               <FaPhone />
             </span>
@@ -103,6 +110,81 @@ const Header = () => {
               <p>Sifariş üçün:</p>
               <h3>*2121</h3>
             </div>
+          </div>
+        </div>
+      )}
+
+      {Shop && (
+        <div className="shop-overlay" onClick={() => setShop(false)}>
+          <div className="shop-panel" onClick={(e) => e.stopPropagation()}>
+            <div className="shop-topbar">
+              <h3>SƏBƏT</h3>
+              <button className="shop-close" onClick={() => setShop(false)}>
+                ✕
+              </button>
+            </div>
+
+            <div className="shop-divider"></div>
+
+            <div className="shop-empty">
+              <MdOutlineShoppingCart size={50} color="#666" />
+              <p>SƏBƏTİNİZ BOŞDUR</p>
+            </div>
+
+            <button className="shop-all-products">Bütün Məhsullar</button>
+          </div>
+        </div>
+      )}
+
+      {Call && (
+        <div className="call-overlay" onClick={() => setCall(false)}>
+          <div className="call-modal" onClick={(e) => e.stopPropagation()}>
+            <h3>Aşağıdakı hissəyə tələb olunan məlumatlarınızı daxil edin</h3>
+            <p>
+              Qeyd etdiyinizdə əməkdaşlarımız ən qısa zamanda sizə geri dönüş
+              edəcəklər.
+            </p>
+
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                if (!name || !surname || !phone) {
+                  setError(true);
+                } else {
+                  setError(false);
+                  alert("Məlumat göndərildi!"); // buranı server request ilə əvəz edə bilərsən
+                  setName("");
+                  setSurname("");
+                  setPhone("");
+                  setCall(false);
+                }
+              }}
+            >
+              <input
+                type="text"
+                placeholder="Ad"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Soyad"
+                value={surname}
+                onChange={(e) => setSurname(e.target.value)}
+              />
+              <input
+                type="tel"
+                placeholder="Telefon nömrəsi"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+
+              {error && <p className="error-msg">Məlumat göndərilmədi!</p>}
+
+              <button type="submit" className="send-btn">
+                Göndər
+              </button>
+            </form>
           </div>
         </div>
       )}

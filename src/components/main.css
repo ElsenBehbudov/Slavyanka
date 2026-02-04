@@ -6,7 +6,7 @@
   overflow: hidden;
 }
 
-/* Image fits full background */
+
 .hero-bg {
     width: 100%;
     object-fit: cover;
@@ -17,7 +17,7 @@
   background-size: contain;
 }
 
-/* Arrows */
+
 .hero-arrow {
   position: absolute;
   top: 50%;
@@ -39,7 +39,7 @@
   right: 20px;
 }
 
-/* Indicators */
+
 .hero-indicators {
   position: absolute;
   bottom: 40px;
@@ -62,7 +62,6 @@
   background: #fff;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .hero {
     height: 400px;

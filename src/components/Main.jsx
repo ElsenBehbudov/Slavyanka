@@ -21,23 +21,19 @@ const Main = () => {
 
   return (
     <section className="hero">
-      {/* Background image */}
       <div
         className="hero-bg"
         style={{ backgroundImage: `url(${slides[active]})` }}
       />
 
-      {/* Left arrow */}
       <button className="hero-arrow left" onClick={prevSlide}>
         ‹
       </button>
 
-      {/* Right arrow */}
       <button className="hero-arrow right" onClick={nextSlide}>
         ›
       </button>
 
-      {/* Indicators */}
       <div className="hero-indicators">
         {slides.map((_, i) => (
           <span
